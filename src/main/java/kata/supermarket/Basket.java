@@ -2,9 +2,8 @@ package kata.supermarket;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Basket {
     private final List<Item> items;
@@ -47,7 +46,15 @@ public class Basket {
          *  which provides that functionality.
          */
         private BigDecimal discounts() {
-            return BigDecimal.ZERO;
+            Map<String, BigDecimal> cumulativeItems = items.stream().collect(Collectors.
+                    groupingBy(Item::sku, Collectors.reducing(BigDecimal.ZERO, Item::amount, BigDecimal::add)));
+
+            Set<Promotion> promotions = items.stream()
+                    .flatMap(item -> item.promotions().stream())
+                    .collect(Collectors.toSet());
+
+            return promotions.stream().map(p -> p.discount(cumulativeItems)).reduce(BigDecimal::add).orElse(BigDecimal.ZERO)
+                    .setScale(2, RoundingMode.HALF_DOWN);
         }
 
         private BigDecimal calculate() {
