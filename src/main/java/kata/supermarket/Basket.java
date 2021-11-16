@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 
 public class Basket {
     private final List<Item> items;
+    private final DiscountCalculator discountCalculator;
 
-    public Basket() {
+    public Basket(final DiscountCalculator discountCalculator) {
+        this.discountCalculator = discountCalculator;
         this.items = new ArrayList<>();
     }
 
@@ -46,15 +48,7 @@ public class Basket {
          *  which provides that functionality.
          */
         private BigDecimal discounts() {
-            Map<String, BigDecimal> cumulativeItems = items.stream().collect(Collectors.
-                    groupingBy(Item::sku, Collectors.reducing(BigDecimal.ZERO, Item::amount, BigDecimal::add)));
-
-            Set<Promotion> promotions = items.stream()
-                    .flatMap(item -> item.promotions().stream())
-                    .collect(Collectors.toSet());
-
-            return promotions.stream().map(p -> p.discount(cumulativeItems)).reduce(BigDecimal::add).orElse(BigDecimal.ZERO)
-                    .setScale(2, RoundingMode.HALF_DOWN);
+            return discountCalculator.calculate(items);
         }
 
         private BigDecimal calculate() {
