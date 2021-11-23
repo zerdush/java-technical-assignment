@@ -1,28 +1,30 @@
 package kata.supermarket;
 
+import kata.supermarket.promotions.Promotion;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 public class ItemByUnit implements Item {
 
-    private final Product product;
+    private final UnitProduct unitProduct;
 
-    ItemByUnit(final Product product) {
-        this.product = product;
+    ItemByUnit(final UnitProduct unitProduct) {
+        this.unitProduct = unitProduct;
     }
 
     public BigDecimal price() {
-        return product.pricePerUnit();
+        return unitProduct.pricePerUnit();
     }
 
     @Override
     public String sku() {
-        return product.sku();
+        return unitProduct.sku();
     }
 
     @Override
     public List<Promotion> promotions() {
-        return product.promotions();
+        return unitProduct.promotions();
     }
 
     @Override

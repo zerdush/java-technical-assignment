@@ -1,5 +1,7 @@
-package kata.supermarket;
+package kata.supermarket.promotions;
 
+import kata.supermarket.UnitProduct;
+import kata.supermarket.promotions.BuyOneGetOneFreePromotion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +22,7 @@ class BuyOneGetOneFreePromotionTest {
     @ParameterizedTest(name = "{0}")
     void promotionDiscount(String description, BigDecimal expectedDiscount, Map<String, BigDecimal> cumulativeItems){
         final BuyOneGetOneFreePromotion promotion =
-                new BuyOneGetOneFreePromotion(new Product(BigDecimal.valueOf(10), "SKUWithPromotion001"));
+                new BuyOneGetOneFreePromotion(new UnitProduct(BigDecimal.valueOf(10), "SKUWithPromotion001"));
         BigDecimal actualDiscount = promotion.discount(cumulativeItems);
         assertEquals(expectedDiscount, actualDiscount);
     }

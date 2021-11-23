@@ -1,5 +1,7 @@
 package kata.supermarket;
 
+import kata.supermarket.promotions.Promotion;
+
 import java.math.BigDecimal;
 import java.util.List;
 

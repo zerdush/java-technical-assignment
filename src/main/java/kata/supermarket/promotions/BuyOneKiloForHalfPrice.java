@@ -1,4 +1,6 @@
-package kata.supermarket;
+package kata.supermarket.promotions;
+
+import kata.supermarket.WeighedProduct;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

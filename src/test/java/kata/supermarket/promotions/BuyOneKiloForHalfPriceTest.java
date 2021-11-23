@@ -1,5 +1,7 @@
-package kata.supermarket;
+package kata.supermarket.promotions;
 
+import kata.supermarket.WeighedProduct;
+import kata.supermarket.promotions.BuyOneKiloForHalfPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

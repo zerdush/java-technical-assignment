@@ -1,38 +1,28 @@
 package kata.supermarket;
 
-import java.math.BigDecimal;
+import kata.supermarket.promotions.Promotion;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
-
     private final List<Promotion> promotions;
     private final String sku;
-    private final BigDecimal pricePerUnit;
 
-    public Product(final BigDecimal pricePerUnit, final String sku) {
-        this.pricePerUnit = pricePerUnit;
-        this.sku = sku;
+    protected Product(final String sku) {
         this.promotions = new ArrayList<>();
-    }
-
-    BigDecimal pricePerUnit() {
-        return pricePerUnit;
+        this.sku = sku;
     }
 
     public String sku() {
         return sku;
     }
 
-    public List<Promotion> promotions(){
+    public List<Promotion> promotions() {
         return promotions;
     }
 
-    public void addPromotion(Promotion promotion){
+    public void addPromotion(Promotion promotion) {
         promotions.add(promotion);
-    }
-
-    public Item oneOf() {
-        return new ItemByUnit(this);
     }
 }

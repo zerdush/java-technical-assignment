@@ -1,5 +1,8 @@
 package kata.supermarket;
 
+import kata.supermarket.promotions.BuyOneGetOneFreePromotion;
+import kata.supermarket.promotions.BuyOneKiloForHalfPrice;
+import kata.supermarket.promotions.Promotion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -38,32 +41,32 @@ class DefaultDiscountCalculatorTest {
     }
 
     private static Arguments aItemWithPromotion() {
-        Product product = aCanOfBeansWithBuyOneGetOneFreePromotion();
+        UnitProduct unitProduct = aCanOfBeansWithBuyOneGetOneFreePromotion();
         return Arguments.of("a item with promotion", "10.00",
-                Arrays.asList(product.oneOf(), product.oneOf()));
+                Arrays.asList(unitProduct.oneOf(), unitProduct.oneOf()));
     }
 
     private static Arguments itemsWithMixPromotions() {
-        Product product = aCanOfBeansWithBuyOneGetOneFreePromotion();
+        UnitProduct unitProduct = aCanOfBeansWithBuyOneGetOneFreePromotion();
         WeighedProduct weighedProduct = aKiloOfTomato();
         return Arguments.of("items with mixed promotion", "14.00",
-                Arrays.asList(product.oneOf(), product.oneOf(), weighedProduct.weighing(BigDecimal.valueOf(1))));
+                Arrays.asList(unitProduct.oneOf(), unitProduct.oneOf(), weighedProduct.weighing(BigDecimal.valueOf(1))));
     }
 
     private static Arguments itemsWithAndWithoutPromotions() {
-        Product product = aCanOfBeansWithBuyOneGetOneFreePromotion();
+        UnitProduct unitProduct = aCanOfBeansWithBuyOneGetOneFreePromotion();
         WeighedProduct weighedProduct = aKiloOfTomato();
         return Arguments.of("items with and without promotions", "14.00",
-                Arrays.asList(product.oneOf(), product.oneOf(),
+                Arrays.asList(unitProduct.oneOf(), unitProduct.oneOf(),
                         weighedProduct.weighing(BigDecimal.valueOf(1)),
                         twoFiftyGramsOfAmericanSweets()));
     }
 
-    private static Product aCanOfBeansWithBuyOneGetOneFreePromotion(){
-        Product product = new Product(new BigDecimal("10.00"), "SKUCanOfBean");
-        Promotion promotion = new BuyOneGetOneFreePromotion(product);
-        product.addPromotion(promotion);
-        return product;
+    private static UnitProduct aCanOfBeansWithBuyOneGetOneFreePromotion(){
+        UnitProduct unitProduct = new UnitProduct(new BigDecimal("10.00"), "SKUCanOfBean");
+        Promotion promotion = new BuyOneGetOneFreePromotion(unitProduct);
+        unitProduct.addPromotion(promotion);
+        return unitProduct;
     }
 
     private static WeighedProduct aKiloOfTomato(){

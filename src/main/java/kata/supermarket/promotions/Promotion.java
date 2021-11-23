@@ -1,4 +1,4 @@
-package kata.supermarket;
+package kata.supermarket.promotions;
 
 import java.math.BigDecimal;
 import java.util.Map;
