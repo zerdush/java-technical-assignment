@@ -35,4 +35,37 @@ public class LunchDealPromotion implements Promotion{
         }
         return BigDecimal.ZERO;
     }
+
+    public static class Builder{
+
+        private UnitProduct sandwichProduct;
+        private UnitProduct canOfDrinkProduct;
+        private UnitProduct packOfCrispsProduct;
+        private BigDecimal valueOfDeal;
+
+        public Builder setSandwich(final UnitProduct sandwichProduct) {
+            this.sandwichProduct = sandwichProduct;
+            return this;
+        }
+
+        public Builder setDrink(final UnitProduct canOfDrinkProduct) {
+            this.canOfDrinkProduct = canOfDrinkProduct;
+            return this;
+        }
+
+        public Builder setCrisps(final UnitProduct packOfCrispsProduct) {
+            this.packOfCrispsProduct = packOfCrispsProduct;
+            return this;
+        }
+
+        public Builder setValueOfDeal(final BigDecimal valueOfDeal) {
+            this.valueOfDeal = valueOfDeal;
+            return this;
+        }
+
+        public LunchDealPromotion build() {
+            return new LunchDealPromotion(sandwichProduct, canOfDrinkProduct, packOfCrispsProduct, valueOfDeal);
+        }
+
+    }
 }
